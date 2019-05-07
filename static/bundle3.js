@@ -286,7 +286,7 @@ document.getElementById("playpause").addEventListener("click", playPause, false)
 
 // Setup our mesh
 var mesh = new THREE.Mesh(geometry, material);
-mesh.position.z = -20;
+mesh.position.z = -25;
 mesh.position.y = -7;
 scene.add(mesh);
 
@@ -304,6 +304,14 @@ var average = function average(array) {
 };
 var stage = 0;
 var songTime = 0;
+function getRandomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+  }
+  var randomTime = false;
+  var interval = 300;
+  var counter = 0;
 createLoop(function (dt) {
   // update time
   // time += dt / 1000;
@@ -317,13 +325,23 @@ createLoop(function (dt) {
   var mid = analyser.data.slice(21, 42);
   var high = analyser.data.slice(42);
   // console.log(sound.context.currentTime);
-  if (stage == 0 && songTime > 67) {
-    stage = 1;
-  } else if (stage == 1 && songTime > 160) {
-    stage = 2;
-  } else if (stage == 2 && songTime > 250) {
-    stage = 3;
+  if (randomTime == true){
+	  if (counter==interval){
+		stage = getRandomInt(3,5);
+		counter = 0;
+	  }
+	  counter+=1;
+  } else {
+	if (stage == 0 && songTime > 10) {
+		stage = 1;
+	  } else if (stage == 1 && songTime > 20) {
+		stage = 2;
+		randomTime = true;
+	  } else if (stage == 2 && songTime > 250) {
+		stage = 3;
+	  }
   }
+
   var lowAvg = void 0,
       midAvg = void 0,
       highAvg = void 0;
