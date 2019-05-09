@@ -338,7 +338,7 @@ createLoop(function (dt) {
 		stage = 2;
 		randomTime = true;
 	  } else if (stage == 2 && songTime > 250) {
-		stage = 3;
+		stage = 2;
 	  }
   }
 
