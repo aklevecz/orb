@@ -335,10 +335,10 @@ createLoop(function (dt) {
 	if (stage == 0 && songTime > 10) {
 		stage = 1;
 	  } else if (stage == 1 && songTime > 20) {
-		stage = 2;
+		stage = 1;
 		randomTime = true;
 	  } else if (stage == 2 && songTime > 250) {
-		stage = 2;
+		stage = 1;
 	  }
   }
 
